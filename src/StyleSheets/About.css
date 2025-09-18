@@ -1,0 +1,133 @@
+/* About Section Layout */
+.about {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 48px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 64px 32px 0 32px;
+  min-height: 600px;
+  box-sizing: border-box;
+}
+
+.about__features {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.about__card {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(44, 62, 80, 0.10);
+  padding: 32px 32px 24px 32px;
+  min-width: 350px;
+  max-width: 480px;
+}
+
+.about__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-top: 4px;
+}
+.about__icon--blue { background: #e3f0fc; color: #2196F3; }
+.about__icon--orange { background: #fff3e0; color: #ff9800; }
+.about__icon--green { background: #e0f7fa; color: #26a69a; }
+
+.about__card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+.about__card-title--blue { color: #142b6f; }
+.about__card-title--orange { color: #ff9800; }
+.about__card-title--green { color: #26a69a; }
+
+.about__card-desc {
+  color: #757575;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.about__info {
+  flex: 1 1 0;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.about__dots {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.about__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.about__dot--blue { background: #2196F3; }
+.about__dot--red { background: #e84118; }
+.about__dot--yellow { background: #fbc531; }
+.about__dot--green { background: #4cd137; }
+.about__dot--purple { background: #8c7ae6; }
+
+.about__title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #142b6f;
+  margin: 0 0 12px 0;
+}
+
+.about__desc {
+  color: #757575;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0 0 8px 0;
+}
+
+.about__btn {
+  margin-top: 16px;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: #3497fd;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.about__btn:hover {
+  background: #1976d2;
+}
+
+@media (max-width: 1100px) {
+  .about {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 32px 8px 0 8px;
+    min-height: 400px;
+    gap: 32px;
+  }
+  .about__features, .about__info {
+    max-width: 100%;
+  }
+  .about__card {
+    min-width: 0;
+    max-width: 100%;
+  }
+}

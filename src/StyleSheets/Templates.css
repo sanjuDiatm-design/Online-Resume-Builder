@@ -1,0 +1,133 @@
+/* ---------------------------
+   Templates Section Layout
+----------------------------- */
+.templates {
+  width: 100%;
+  max-width: 1600px;     /* keeps content centered */
+  margin: 0 auto;        /* center horizontally */
+  padding: 64px 32px 0;  /* space around */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---------------------------
+   Header Section
+----------------------------- */
+.templates__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+/* Dots above title */
+.templates__dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+.templates__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;  /* makes it round */
+}
+.templates__dot--blue   { background: #2196F3; }
+.templates__dot--yellow { background: #fbc531; }
+.templates__dot--green  { background: #4cd137; }
+.templates__dot--red    { background: #e84118; }
+.templates__dot--purple { background: #8c7ae6; }
+
+/* Title and Subtitle */
+.templates__title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #142b6f;
+  margin: 0 0 12px;
+}
+.templates__subtitle {
+  color: #757575;
+  font-size: 1.18rem;
+  margin: 0;
+}
+
+/* ---------------------------
+   Template Cards Layout
+----------------------------- */
+.templates__cards {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Each Card */
+.templates__card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 24px 24px;
+  width: 370px;
+  min-width: 280px;
+  max-width: 400px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+/* Hover effect */
+.templates__card:hover {
+  box-shadow: 0 12px 40px rgba(44, 62, 80, 0.18);
+  transform: translateY(-6px) scale(1.03);
+}
+
+/* Template Image inside card */
+.templates__image {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.10);
+}
+
+/* Button inside card */
+.templates__btn {
+  margin-top: auto;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: #3497fd;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.templates__btn:hover {
+  background: #1976d2;
+}
+
+/* ---------------------------
+   Responsive Design
+----------------------------- */
+@media (max-width: 1200px) {
+  .templates__cards {
+    gap: 20px;
+  }
+  .templates__card {
+    width: 300px;
+    padding: 24px 12px;
+  }
+}
+
+@media (max-width: 900px) {
+  .templates__cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+  .templates__card {
+    width: 90vw;
+    max-width: 400px;
+  }
+}
