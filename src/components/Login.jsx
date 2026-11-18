@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth, API_BASE_URL } from '../context/AuthContext';
 import '../StyleSheets/Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage(''); // Clear previous messages
+    setMessage('');
+    setIsLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -22,46 +26,67 @@ function Login() {
       const data = await res.json();
 
       if (res.ok) {
-        localStorage.setItem("token", data.token);
+        login(data.token, data.user);
         setMessage("Login successful!");
-        navigate('/');
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 500);
       } else {
-        setMessage(data.error || "Login failed.");
+        setMessage(data.error || "Login failed. Please check your credentials.");
       }
     } catch (error) {
-      setMessage("Network error. Please try again later.");
+      setMessage("Could not connect to backend server. Make sure MongoDB and backend are running.");
       console.error("Login error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
-        <h2>Login</h2>
+        <h2>Welcome Back</h2>
+        <p className="login-subtitle">Sign in to manage and edit your saved resumes</p>
+        
+        {message && (
+          <div className={`message-banner ${message.includes('successful') ? 'success' : 'error'}`}>
+            {message}
+          </div>
+        )}
+
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Email Address</label>
           <input
             type="email"
             id="email"
             name="email"
+            placeholder="you@example.com"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
+        
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
             name="password"
+            placeholder="••••••••"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit" className="login-btn">Login</button>
-        {message && <p className="message">{message}</p>}
+
+        <button type="submit" className="login-btn" disabled={isLoading}>
+          {isLoading ? 'Signing In...' : 'Sign In'}
+        </button>
+
+        <p className="auth-switch">
+          Don't have an account? <Link to="/signup">Create one now</Link>
+        </p>
       </form>
     </div>
   );

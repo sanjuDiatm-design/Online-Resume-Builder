@@ -1,3 +1,7 @@
+/* ============================================================
+   Features Section — Scoped CSS (.features__ prefix)
+   ============================================================ */
+
 /* Layout */
 .features {
   max-width: 1400px;
@@ -10,43 +14,44 @@
 }
 
 /* Header */
-.header {
+.features__header {
   text-align: center;
   margin-bottom: 48px;
 }
 
-.dots {
+.features__dots {
   display: flex;
   gap: 8px;
   justify-content: center;
   margin-bottom: 8px;
 }
-.dot {
+
+.features__dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
 }
-.dot.blue { background: #2196F3; }
-.dot.yellow { background: #fbc531; }
-.dot.green { background: #4cd137; }
-.dot.red { background: #e84118; }
-.dot.purple { background: #8c7ae6; }
+.features__dot--blue   { background: #2196F3; }
+.features__dot--yellow { background: #fbc531; }
+.features__dot--green  { background: #4cd137; }
+.features__dot--red    { background: #e84118; }
+.features__dot--purple { background: #8c7ae6; }
 
-.title {
-  font-size: 2.5rem;
+.features__title {
+  font-size: 2.4rem;
   font-weight: 800;
-  color: #142b6f;
+  color: #0f172a;
   margin-bottom: 12px;
 }
 
-.subtitle {
+.features__subtitle {
   font-size: 1.1rem;
   color: #757575;
   margin: 0;
 }
 
 /* Grid */
-.grid {
+.features__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px 32px;
@@ -55,23 +60,54 @@
 }
 
 /* Card */
-.card {
-  background: #fff;
+.features__card {
+  background: #ffffff;
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.12);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.08);
   padding: 36px 28px;
   min-width: 280px;
   max-width: 400px;
   text-align: center;
-  transition: box-shadow 0.2s, transform 0.2s;
-}
-.card:hover {
-  box-shadow: 0 12px 40px rgba(44, 62, 80, 0.18);
-  transform: translateY(-6px) scale(1.03);
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Colored left border accent on hover */
+.features__card::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #2563eb, #60a5fa);
+  border-radius: 4px 0 0 4px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.features__card:hover {
+  box-shadow: 0 12px 40px rgba(37, 99, 235, 0.14);
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(37, 99, 235, 0.2);
+}
+
+.features__card:hover::after {
+  opacity: 1;
+}
+
+/* Stagger hover delay classes */
+.features__card--stagger-0 { transition-delay: 0s; }
+.features__card--stagger-1 { transition-delay: 0.04s; }
+.features__card--stagger-2 { transition-delay: 0.08s; }
+.features__card--stagger-3 { transition-delay: 0.12s; }
+.features__card--stagger-4 { transition-delay: 0.16s; }
+.features__card--stagger-5 { transition-delay: 0.20s; }
+
 /* Icon */
-.icon {
+.features__icon {
   width: 64px;
   height: 64px;
   border-radius: 50%;
@@ -81,30 +117,42 @@
   font-size: 2.2rem;
   margin: 0 auto 18px;
 }
-.icon.orange { background: #fff3e0; color: #ff9800; }
-.icon.blue { background: #e3f0fc; color: #2196F3; }
-.icon.red { background: #ffeaea; color: #e84118; }
-.icon.green { background: #e0f7fa; color: #26a69a; }
-.icon.yellow { background: #fffde7; color: #fbc531; }
+.features__icon--orange { background: #fff3e0; color: #ff9800; }
+.features__icon--blue   { background: #e3f0fc; color: #2196F3; }
+.features__icon--red    { background: #ffeaea; color: #e84118; }
+.features__icon--green  { background: #e0f7fa; color: #26a69a; }
+.features__icon--yellow { background: #fffde7; color: #fbc531; }
 
 /* Text */
-.card-title {
+.features__card-title {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #142b6f;
+  color: #0f172a;
   margin-bottom: 12px;
 }
-.card-desc {
+
+.features__card-desc {
   font-size: 1rem;
   color: #757575;
   margin: 0;
+  line-height: 1.6;
 }
 
 /* Responsive */
 @media (max-width: 1200px) {
-  .grid { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
+  .features__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 20px;
+  }
 }
+
 @media (max-width: 900px) {
-  .grid { grid-template-columns: 1fr; gap: 24px; }
-  .card { width: 90vw; max-width: 400px; }
+  .features__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .features__card {
+    width: 90vw;
+    max-width: 400px;
+  }
 }

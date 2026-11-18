@@ -3,9 +3,9 @@
 ----------------------------- */
 .templates {
   width: 100%;
-  max-width: 1600px;     /* keeps content centered */
-  margin: 0 auto;        /* center horizontally */
-  padding: 64px 32px 0;  /* space around */
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -20,114 +20,139 @@
   margin-bottom: 48px;
 }
 
-/* Dots above title */
 .templates__dots {
   display: flex;
   gap: 8px;
   justify-content: center;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 .templates__dot {
   width: 10px;
   height: 10px;
-  border-radius: 50%;  /* makes it round */
+  border-radius: 50%;
 }
-.templates__dot--blue   { background: #2196F3; }
-.templates__dot--yellow { background: #fbc531; }
-.templates__dot--green  { background: #4cd137; }
-.templates__dot--red    { background: #e84118; }
-.templates__dot--purple { background: #8c7ae6; }
+.templates__dot--blue   { background: #2563eb; }
+.templates__dot--yellow { background: #f59e0b; }
+.templates__dot--green  { background: #10b981; }
+.templates__dot--red    { background: #ef4444; }
+.templates__dot--purple { background: #8b5cf6; }
 
-/* Title and Subtitle */
 .templates__title {
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   font-weight: 800;
-  color: #142b6f;
+  color: #0f172a;
   margin: 0 0 12px;
+  letter-spacing: -0.5px;
 }
+
 .templates__subtitle {
-  color: #757575;
-  font-size: 1.18rem;
-  margin: 0;
+  color: #64748b;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
 }
 
 /* ---------------------------
    Template Cards Layout
 ----------------------------- */
 .templates__cards {
-  display: flex;
-  gap: 40px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
   width: 100%;
 }
 
-/* Each Card */
 .templates__card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.12);
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 32px 24px 24px;
-  width: 370px;
-  min-width: 280px;
-  max-width: 400px;
-  transition: box-shadow 0.2s, transform 0.2s;
-}
-/* Hover effect */
-.templates__card:hover {
-  box-shadow: 0 12px 40px rgba(44, 62, 80, 0.18);
-  transform: translateY(-6px) scale(1.03);
 }
 
-/* Template Image inside card */
+.templates__card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: #cbd5e1;
+}
+
+.templates__card-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(15, 23, 42, 0.85);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+  z-index: 10;
+}
+
+.templates__image-container {
+  height: 340px;
+  overflow: hidden;
+  background: #f8fafc;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 12px;
+}
+
 .templates__image {
-  width: 100%;
+  width: 90%;
   height: auto;
   border-radius: 6px;
-  margin-bottom: 28px;
-  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.10);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-/* Button inside card */
+.templates__card:hover .templates__image {
+  transform: scale(1.02);
+}
+
+.templates__info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.templates__card-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 6px 0;
+}
+
+.templates__card-desc {
+  font-size: 0.88rem;
+  color: #64748b;
+  margin: 0 0 20px 0;
+  line-height: 1.5;
+  flex: 1;
+}
+
 .templates__btn {
-  margin-top: auto;
-  padding: 14px 32px;
+  width: 100%;
+  padding: 12px;
+  background: #2563eb;
+  color: white;
   border: none;
   border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  background: #3497fd;
-  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s ease;
 }
+
 .templates__btn:hover {
-  background: #1976d2;
-}
-
-/* ---------------------------
-   Responsive Design
------------------------------ */
-@media (max-width: 1200px) {
-  .templates__cards {
-    gap: 20px;
-  }
-  .templates__card {
-    width: 300px;
-    padding: 24px 12px;
-  }
-}
-
-@media (max-width: 900px) {
-  .templates__cards {
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-  }
-  .templates__card {
-    width: 90vw;
-    max-width: 400px;
-  }
+  background: #1d4ed8;
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../StyleSheets/About.css';
 
 function About() {
@@ -44,7 +45,9 @@ function About() {
         <h2 className="about__title">Why Choose Our Platform?</h2>
         <p className="about__desc">Our CV builder is designed to simplify your job search. With a range of modern templates and real-time content suggestions, you can create a resume that truly reflects your skills and experience.</p>
         <p className="about__desc">Whether you're a recent graduate or an experienced professional, our platform helps you craft a compelling CV that gets noticed. Start building your future today with tools trusted by job seekers worldwide.</p>
-        <button className="about__btn">LETS BUILD YOUR CV</button>
+        <Link to="/template">
+          <button className="about__btn">LETS BUILD YOUR CV</button>
+        </Link>
       </div>
     </section>
   );

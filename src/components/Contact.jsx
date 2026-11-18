@@ -20,7 +20,7 @@ function Contact() {
       <div className="contact__container">
         <header className="contact__header">
           <h1 className="contact__title">Contact Us</h1>
-          <p className="contact__subtitle">Have questions or feedback? Send us a message and we’ll get back to you shortly.</p>
+          <p className="contact__subtitle">Have questions or feedback? Send us a message and we'll get back to you shortly.</p>
         </header>
 
         <div className="contact__grid">
@@ -46,10 +46,36 @@ function Contact() {
           </form>
 
           <aside className="contact__info">
-            <h2 className="contact__info-title">Get in touch</h2>
-            <p className="contact__info-text">Email: sakshamwork47@gmail.com</p>
-            <p className="contact__info-text">Phone: +91 6006915762</p>
-            <p className="contact__info-text">Address: Ludhiana, Punjab</p>
+            <div className="contact__info-header">
+              <span className="contact__info-header-icon">✉️</span>
+              <h2 className="contact__info-title">Get in touch</h2>
+            </div>
+
+            <div className="contact__info-items">
+              <p className="contact__info-text">
+                <span className="contact__info-icon">📧</span>
+                <span>
+                  <strong>Email</strong><br />
+                  <a href="mailto:sg6289793@gmail.com" className="contact__info-link">sg6289793@gmail.com</a>
+                </span>
+              </p>
+              <p className="contact__info-text">
+                <span className="contact__info-icon">📞</span>
+                <span>
+                  <strong>Phone</strong><br />
+                  +91 8509729245
+                </span>
+              </p>
+              <p className="contact__info-text">
+                <span className="contact__info-icon">👤</span>
+                <span>
+                  <strong>Contact</strong><br />
+                  Sanju Ghosh
+                </span>
+              </p>
+            </div>
+
+            <p className="contact__response-note">⏱ We typically respond within 24 hours</p>
           </aside>
         </div>
       </div>
@@ -58,5 +84,3 @@ function Contact() {
 }
 
 export default Contact;
-
-

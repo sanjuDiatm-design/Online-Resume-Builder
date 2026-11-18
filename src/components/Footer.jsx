@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaLinkedin, FaTwitter, FaGithub, FaEnvelope } from 'react-icons/fa';
 import '../StyleSheets/Footer.css';
 
@@ -29,20 +30,25 @@ const Footer = () => {
         <div className="footer__section">
           <h4 className="footer__subheading">Quick Links</h4>
           <ul className="footer__links">
-            <li><a href="/" className="footer__link">Home</a></li>
-            <li><a href="/about" className="footer__link">About Us</a></li>
-            <li><a href="/templates" className="footer__link">Templates</a></li>
-            <li><a href="/contact" className="footer__link">Contact</a></li>
+            <li><Link to="/" className="footer__link">Home</Link></li>
+            <li><Link to="/about" className="footer__link">About Us</Link></li>
+            <li><Link to="/template" className="footer__link">Templates</Link></li>
+            <li><Link to="/build/template-one" className="footer__link">Resume Builder</Link></li>
+            <li><Link to="/contact" className="footer__link">Contact</Link></li>
           </ul>
         </div>
 
         <div className="footer__section">
           <h4 className="footer__subheading">Contact Us</h4>
           <div className="footer__contact">
-            <a href="sakshamnnda01@gmail.com" className="footer__contact-link">
+            <p style={{ color: '#fff', fontWeight: 600, margin: '0 0 6px' }}>Sanju Ghosh</p>
+            <a href="mailto:sg6289793@gmail.com" className="footer__contact-link">
               <FaEnvelope className="footer__contact-icon" />
-              sakshamwork47@gmail.com
+              sg6289793@gmail.com
             </a>
+            <p style={{ color: '#aaa', fontSize: '0.88rem', margin: '6px 0 0' }}>
+              📞 +91 8509729245
+            </p>
           </div>
         </div>
       </div>
