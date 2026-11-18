@@ -60,7 +60,7 @@
   flex-wrap: wrap;
   gap: 16px;
   position: sticky;
-  top: 72px;
+  top: 68px;
   z-index: 50;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
@@ -1048,6 +1048,99 @@
   .builder-preview-wrapper {
     position: static;
     height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .builder-main {
+    padding: 12px;
+    gap: 16px;
+  }
+
+  .builder-toolbar {
+    top: 68px;
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .toolbar-left,
+  .resume-title-input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .toolbar-center {
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .template-picker {
+    overflow-x: auto;
+    max-width: 100%;
+    padding: 4px;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .toolbar-right {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 6px;
+  }
+
+  .tool-btn {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  .editor-card {
+    padding: 16px;
+  }
+
+  .editor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .date-group {
+    grid-template-columns: 1fr;
+  }
+
+  .t1-body,
+  .t3-layout,
+  .t4-ats-layout {
+    padding: 24px 16px;
+  }
+
+  .t2-layout {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .t2-sidebar {
+    width: 100%;
+    padding: 24px 16px;
+  }
+
+  .t2-main {
+    padding: 24px 16px;
+  }
+
+  .t3-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .t3-meta {
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+
+  .t3-projects-grid,
+  .t3-bottom-grid {
+    grid-template-columns: 1fr;
   }
 }
 
