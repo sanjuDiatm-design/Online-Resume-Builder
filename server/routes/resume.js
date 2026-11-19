@@ -1,11 +1,20 @@
 import { Router } from 'express';
 import mongoose from 'mongoose';
 import Resume from '../models/Resume.js';
+import { connectDB } from '../server.js';
 import { memoryStore } from '../utils/memoryStore.js';
 import auth from '../utils/authMiddleware.js';
 
 const router = Router();
 const isDbConnected = () => mongoose.connection.readyState === 1;
+
+// Reconnect check
+router.use(async (_req, _res, next) => {
+	if (!isDbConnected() && process.env.MONGO_URI) {
+		await connectDB();
+	}
+	next();
+});
 
 // All resume routes require authentication
 router.use(auth());

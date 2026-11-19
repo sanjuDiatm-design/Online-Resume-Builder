@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import mongoose from 'mongoose';
 import User from '../models/User.js';
+import { connectDB } from '../server.js';
 import { memoryStore } from '../utils/memoryStore.js';
 import auth from '../utils/authMiddleware.js';
 
@@ -21,31 +22,44 @@ router.post('/signup', async (req, res) => {
 			return res.status(400).json({ error: 'Name, email and password are required.' });
 		}
 
+		const cleanEmail = email.toLowerCase().trim();
+		const cleanName = name.trim();
+
+		// Attempt to connect if disconnected
+		if (!isDbConnected() && process.env.MONGO_URI) {
+			await connectDB();
+		}
+
 		const salt = await bcrypt.genSalt(10);
 		const passwordHash = await bcrypt.hash(password, salt);
 
 		if (isDbConnected()) {
-			const existing = await User.findOne({ email });
+			const existing = await User.findOne({ email: cleanEmail });
 			if (existing) {
-				return res.status(409).json({ error: 'Email already in use.' });
+				return res.status(409).json({ error: 'Email already in use. Please log in instead.' });
 			}
-			const user = await User.create({ name, email, passwordHash });
+			const user = await User.create({ name: cleanName, email: cleanEmail, passwordHash });
 			const token = jwt.sign({ sub: user.id, roles: user.roles }, jwtSecret, { expiresIn: jwtExpiresIn });
 			return res.status(201).json({
 				message: 'Signup successful',
 				token,
 				user: { id: user.id, name: user.name, email: user.email, roles: user.roles },
 			});
+		} else if (process.env.VERCEL) {
+			// On Vercel, memory store is ephemeral and will lose data across lambda instances
+			return res.status(503).json({
+				error: 'Database connection failed. Please ensure MongoDB Atlas Network Access is set to 0.0.0.0/0 (Allow access from anywhere).',
+			});
 		} else {
-			// Fallback memory store
-			const existing = memoryStore.findUserByEmail(email);
+			// Local development fallback memory store
+			const existing = memoryStore.findUserByEmail(cleanEmail);
 			if (existing) {
-				return res.status(409).json({ error: 'Email already in use.' });
+				return res.status(409).json({ error: 'Email already in use. Please log in instead.' });
 			}
-			const user = memoryStore.createUser({ name, email, passwordHash });
+			const user = memoryStore.createUser({ name: cleanName, email: cleanEmail, passwordHash });
 			const token = jwt.sign({ sub: user.id, roles: user.roles }, jwtSecret, { expiresIn: jwtExpiresIn });
 			return res.status(201).json({
-				message: 'Signup successful (Demo mode)',
+				message: 'Signup successful (Local memory mode)',
 				token,
 				user: { id: user.id, name: user.name, email: user.email, roles: user.roles },
 			});
@@ -64,8 +78,15 @@ router.post('/login', async (req, res) => {
 			return res.status(400).json({ error: 'Email and password are required.' });
 		}
 
+		const cleanEmail = email.toLowerCase().trim();
+
+		// Attempt to connect if disconnected
+		if (!isDbConnected() && process.env.MONGO_URI) {
+			await connectDB();
+		}
+
 		if (isDbConnected()) {
-			const user = await User.findOne({ email });
+			const user = await User.findOne({ email: cleanEmail });
 			if (!user) {
 				return res.status(401).json({ error: 'Invalid email or password.' });
 			}
@@ -79,9 +100,13 @@ router.post('/login', async (req, res) => {
 				token,
 				user: { id: user.id, name: user.name, email: user.email, roles: user.roles },
 			});
+		} else if (process.env.VERCEL) {
+			return res.status(503).json({
+				error: 'Database connection failed. Please ensure MongoDB Atlas Network Access is set to 0.0.0.0/0 (Allow access from anywhere).',
+			});
 		} else {
-			// Fallback memory store
-			const user = memoryStore.findUserByEmail(email);
+			// Local development fallback memory store
+			const user = memoryStore.findUserByEmail(cleanEmail);
 			if (!user) {
 				return res.status(401).json({ error: 'Invalid email or password.' });
 			}
@@ -105,6 +130,10 @@ router.post('/login', async (req, res) => {
 // GET /api/auth/me (protected)
 router.get('/me', auth(), async (req, res) => {
 	try {
+		if (!isDbConnected() && process.env.MONGO_URI) {
+			await connectDB();
+		}
+
 		if (isDbConnected()) {
 			const user = await User.findById(req.userId).select('name email roles');
 			if (user) {

@@ -30,10 +30,11 @@ function Signup() {
     setIsLoading(true);
 
     try {
+      const cleanEmail = email.trim().toLowerCase();
       const res = await fetch(`${API_BASE_URL}/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ name: name.trim(), email: cleanEmail, password }),
       });
 
       const data = await res.json();
@@ -90,6 +91,9 @@ function Signup() {
             name="email"
             placeholder="jane@example.com"
             required
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck="false"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />

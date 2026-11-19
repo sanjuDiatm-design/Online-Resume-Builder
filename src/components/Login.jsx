@@ -17,10 +17,11 @@ function Login() {
     setIsLoading(true);
 
     try {
+      const cleanEmail = email.trim().toLowerCase();
       const res = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: cleanEmail, password }),
       });
 
       const data = await res.json();
@@ -62,6 +63,9 @@ function Login() {
             name="email"
             placeholder="you@example.com"
             required
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck="false"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
